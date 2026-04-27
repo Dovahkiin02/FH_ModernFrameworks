@@ -1,0 +1,55 @@
+{
+	"version": 3,
+	"routes": [
+		{
+			"src": "/_app/immutable/.+",
+			"headers": {
+				"cache-control": "public, immutable, max-age=31536000"
+			}
+		},
+		{
+			"handle": "filesystem"
+		},
+		{
+			"src": "^/?(?:/__data.json)?$",
+			"dest": "/"
+		},
+		{
+			"src": "^/auth/callback/?(?:/__data.json)?$",
+			"dest": "/(auth)/auth/callback"
+		},
+		{
+			"src": "^/history/?(?:/__data.json)?$",
+			"dest": "/(app)/history"
+		},
+		{
+			"src": "^/how-to-play/?(?:/__data.json)?$",
+			"dest": "/how-to-play"
+		},
+		{
+			"src": "^/lab/?(?:/__data.json)?$",
+			"dest": "/(app)/lab"
+		},
+		{
+			"src": "^/login/?(?:/__data.json)?$",
+			"dest": "/(auth)/login"
+		},
+		{
+			"src": "^/logout/?(?:/__data.json)?$",
+			"dest": "/(auth)/logout"
+		},
+		{
+			"src": "^/play/?(?:/__data.json)?$",
+			"dest": "/(app)/play"
+		},
+		{
+			"src": "^/signup/?(?:/__data.json)?$",
+			"dest": "/(auth)/signup"
+		},
+		{
+			"src": "/.*",
+			"dest": "/![-]/catchall"
+		}
+	],
+	"overrides": {}
+}
