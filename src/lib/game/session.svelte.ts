@@ -223,7 +223,7 @@ export class GameSession {
 				...this.state,
 				status: 'lost',
 				completedAt: Date.now(),
-				lossReason: `${this.state.players[0]?.name ?? 'The first player'} begins with no legal move.`
+				lossReason: `${this.state.players[0]?.name ?? 'The opening player'} has no legal opening move.`
 			};
 		}
 

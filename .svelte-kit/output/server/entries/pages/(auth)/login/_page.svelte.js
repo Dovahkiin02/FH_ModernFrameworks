@@ -9,7 +9,7 @@ function _page($$renderer, $$props) {
     } else {
       $$renderer2.push("<!--[-1-->");
     }
-    $$renderer2.push(`<!--]--> <form action="?/default" autocomplete="on" class="space-y-4" data-1p-ignore="" data-lpignore="true" method="POST"><label class="block space-y-2"><span class="text-sm font-bold text-slate-700">Email</span> <input autocomplete="email" autocapitalize="none" class="field-input" id="login-email" inputmode="email" name="email" required="" spellcheck="false" type="email"${attr("value", form?.email ?? "")}/></label> <label class="block space-y-2"><span class="text-sm font-bold text-slate-700">Password</span> <input autocomplete="current-password" class="field-input" id="login-password" minlength="6" name="password" required="" type="password"/></label> `);
+    $$renderer2.push(`<!--]--> <form action="?/submit" autocomplete="on" class="space-y-4" data-1p-ignore="" data-lpignore="true" method="POST"><label class="block space-y-2"><span class="text-sm font-bold text-slate-700">Email</span> <input autocomplete="email" autocapitalize="none" class="field-input" id="login-email" inputmode="email" name="email" required="" spellcheck="false" type="email"${attr("value", form?.email ?? "")}/></label> <label class="block space-y-2"><span class="text-sm font-bold text-slate-700">Password</span> <input autocomplete="current-password" class="field-input" id="login-password" minlength="6" name="password" required="" type="password"/></label> `);
     if (form?.error) {
       $$renderer2.push("<!--[0-->");
       $$renderer2.push(`<p class="rounded-[18px] bg-rose-50 px-4 py-3 text-sm font-semibold text-rose-700">${escape_html(form.error)}</p>`);

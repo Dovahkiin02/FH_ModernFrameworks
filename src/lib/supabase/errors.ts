@@ -1,51 +1,27 @@
-function getErrorCauseMessage(error: unknown): string | null {
-	if (
-		error &&
-		typeof error === 'object' &&
-		'cause' in error &&
-		error.cause &&
-		typeof error.cause === 'object' &&
-		'message' in error.cause &&
-		typeof error.cause.message === 'string'
-	) {
-		return error.cause.message;
-	}
-
-	return null;
-}
-
-function getErrorCauseCode(error: unknown): string | null {
-	if (
-		error &&
-		typeof error === 'object' &&
-		'cause' in error &&
-		error.cause &&
-		typeof error.cause === 'object' &&
-		'code' in error.cause &&
-		typeof error.cause.code === 'string'
-	) {
-		return error.cause.code;
-	}
-
-	return null;
-}
+type ErrorWithCause = Error & {
+	cause?: {
+		code?: string;
+		message?: string;
+	};
+};
 
 export function formatSupabaseRequestError(error: unknown, mode: 'signup' | 'login'): string {
-	const baseAction = mode === 'signup' ? 'Sign-up' : 'Login';
-	const causeMessage = getErrorCauseMessage(error);
-	const causeCode = getErrorCauseCode(error);
+	const action = mode === 'signup' ? 'Sign-up' : 'Login';
+	const cause = error instanceof Error ? (error as ErrorWithCause).cause : undefined;
+	const causeCode = typeof cause?.code === 'string' ? cause.code : null;
+	const causeMessage = typeof cause?.message === 'string' ? cause.message : null;
 
 	if (causeCode === 'SELF_SIGNED_CERT_IN_CHAIN') {
-		return `${baseAction} could not reach Supabase because your local Node runtime does not trust the HTTPS certificate chain on this network. Try another network or trust the proxy/root certificate locally.`;
+		return `${action} could not reach Supabase because this network is rewriting HTTPS certificates. Try another network or trust the local root certificate first.`;
 	}
 
 	if (causeMessage) {
-		return `${baseAction} failed: ${causeMessage}`;
+		return `${action} failed: ${causeMessage}`;
 	}
 
 	if (error instanceof Error) {
-		return `${baseAction} failed: ${error.message}`;
+		return `${action} failed: ${error.message}`;
 	}
 
-	return `${baseAction} failed unexpectedly.`;
+	return `${action} failed.`;
 }

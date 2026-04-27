@@ -44,6 +44,10 @@
     "file": "chunks/errors.js",
     "name": "errors"
   },
+  "_errors2.js": {
+    "file": "chunks/errors2.js",
+    "name": "errors"
+  },
   "_exports.js": {
     "file": "chunks/exports.js",
     "name": "exports"
@@ -244,7 +248,8 @@
     "src": "src/routes/(auth)/login/+page.server.ts",
     "isEntry": true,
     "imports": [
-      "_config.js"
+      "_config.js",
+      "_errors2.js"
     ]
   },
   "src/routes/(auth)/login/+page.svelte": {
@@ -268,7 +273,8 @@
     "src": "src/routes/(auth)/signup/+page.server.ts",
     "isEntry": true,
     "imports": [
-      "_config.js"
+      "_config.js",
+      "_errors2.js"
     ]
   },
   "src/routes/(auth)/signup/+page.svelte": {
@@ -296,7 +302,7 @@
       "_attributes.js"
     ],
     "css": [
-      "_app/immutable/assets/_layout.D4-6EQCl.css"
+      "_app/immutable/assets/_layout.RvN1bt7W.css"
     ]
   },
   "src/routes/+page.svelte": {

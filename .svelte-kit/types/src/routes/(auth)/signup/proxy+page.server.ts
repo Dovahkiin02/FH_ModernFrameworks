@@ -2,7 +2,7 @@
 import { fail, redirect } from '@sveltejs/kit';
 import { SUPABASE_CONFIG_ERROR } from '$lib/supabase/config';
 import type { Actions, PageServerLoad } from './$types';
-import { formatSupabaseRequestError } from "$lib/supabase/errors.ts";
+import { formatSupabaseRequestError } from '$lib/supabase/errors';
 
 export const load = async ({ parent }: Parameters<PageServerLoad>[0]) => {
 	const { user } = await parent();
@@ -33,7 +33,6 @@ export const actions = {
 				}
 			}));
 		} catch (error) {
-			const message = error instanceof Error ? error.message : 'Sign-up failed unexpectedly.';
 			return fail(500, { error: formatSupabaseRequestError(error, 'signup'), email });
 		}
 
@@ -46,7 +45,7 @@ export const actions = {
 		}
 
 		return {
-			success: 'Account created. If email confirmation is enabled in Supabase, check your inbox next.',
+			success: 'Account created. Check your inbox if email confirmation is turned on in Supabase.',
 			email
 		};
 	}
