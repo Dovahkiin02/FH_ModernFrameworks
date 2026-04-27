@@ -60,9 +60,11 @@ declare module '$env/static/private' {
 	export const LC_ALL: string;
 	export const USER: string;
 	export const NVM_DIR: string;
+	export const NX_BASE: string;
 	export const LS_COLORS: string;
 	export const COMMAND_MODE: string;
 	export const npm_config_globalconfig: string;
+	export const rb: string;
 	export const SSH_AUTH_SOCK: string;
 	export const __CF_USER_TEXT_ENCODING: string;
 	export const npm_execpath: string;
@@ -94,6 +96,8 @@ declare module '$env/static/private' {
 	export const SHLVL: string;
 	export const HOME: string;
 	export const CODEX_SHELL: string;
+	export const CI_MERGE_REQUEST_TARGET_BRANCH_NAME: string;
+	export const LOG_FORMAT: string;
 	export const HOMEBREW_PREFIX: string;
 	export const GH_PAGER: string;
 	export const npm_config_cache: string;
@@ -112,7 +116,13 @@ declare module '$env/static/private' {
 	export const npm_config_prefix: string;
 	export const COLORTERM: string;
 	export const CODEX_INTERNAL_ORIGINATOR_OVERRIDE: string;
+	export const TEST: string;
+	export const VITEST: string;
 	export const NODE_ENV: string;
+	export const PROD: string;
+	export const DEV: string;
+	export const BASE_URL: string;
+	export const MODE: string;
 }
 
 /**
@@ -222,9 +232,11 @@ declare module '$env/dynamic/private' {
 		LC_ALL: string;
 		USER: string;
 		NVM_DIR: string;
+		NX_BASE: string;
 		LS_COLORS: string;
 		COMMAND_MODE: string;
 		npm_config_globalconfig: string;
+		rb: string;
 		SSH_AUTH_SOCK: string;
 		__CF_USER_TEXT_ENCODING: string;
 		npm_execpath: string;
@@ -256,6 +268,8 @@ declare module '$env/dynamic/private' {
 		SHLVL: string;
 		HOME: string;
 		CODEX_SHELL: string;
+		CI_MERGE_REQUEST_TARGET_BRANCH_NAME: string;
+		LOG_FORMAT: string;
 		HOMEBREW_PREFIX: string;
 		GH_PAGER: string;
 		npm_config_cache: string;
@@ -274,7 +288,13 @@ declare module '$env/dynamic/private' {
 		npm_config_prefix: string;
 		COLORTERM: string;
 		CODEX_INTERNAL_ORIGINATOR_OVERRIDE: string;
+		TEST: string;
+		VITEST: string;
 		NODE_ENV: string;
+		PROD: string;
+		DEV: string;
+		BASE_URL: string;
+		MODE: string;
 		[key: `PUBLIC_${string}`]: undefined;
 		[key: `${string}`]: string | undefined;
 	}
