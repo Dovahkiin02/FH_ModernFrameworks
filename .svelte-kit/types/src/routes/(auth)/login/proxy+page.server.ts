@@ -20,18 +20,20 @@ export const actions = {
 			return fail(503, { error: SUPABASE_CONFIG_ERROR, email });
 		}
 
+		let error;
+
 		try {
-			const { error } = await locals.supabase.auth.signInWithPassword({ email, password });
-
-			if (error) {
-				return fail(400, { error: error.message, email });
-			}
-
-			redirect(303, '/play');
+			({ error } = await locals.supabase.auth.signInWithPassword({ email, password }));
 		} catch (error) {
 			const message = error instanceof Error ? error.message : 'Login failed unexpectedly.';
 			return fail(500, { error: message, email });
 		}
+
+		if (error) {
+			return fail(400, { error: error.message, email });
+		}
+
+		redirect(303, '/play');
 	}
 };
 ;null as any as Actions;
