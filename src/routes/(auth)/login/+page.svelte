@@ -18,7 +18,7 @@
 			</p>
 		{/if}
 
-		<form action="?/default" autocomplete="on" class="space-y-4" data-1p-ignore data-lpignore="true" method="POST">
+		<form action="?/submit" autocomplete="on" class="space-y-4" data-1p-ignore data-lpignore="true" method="POST">
 			<label class="block space-y-2">
 				<span class="text-sm font-bold text-slate-700">Email</span>
 				<input

@@ -1,6 +1,7 @@
 import { fail, redirect } from '@sveltejs/kit';
 import { SUPABASE_CONFIG_ERROR } from '$lib/supabase/config';
 import type { Actions, PageServerLoad } from './$types';
+import { formatSupabaseRequestError } from "$lib/supabase/errors.ts";
 
 export const load: PageServerLoad = async ({ parent }) => {
 	const { user } = await parent();
@@ -10,7 +11,7 @@ export const load: PageServerLoad = async ({ parent }) => {
 };
 
 export const actions: Actions = {
-	default: async ({ request, locals, url }) => {
+	submit: async ({ request, locals, url }) => {
 		const formData = await request.formData();
 		const email = String(formData.get('email') ?? '').trim();
 		const password = String(formData.get('password') ?? '');
@@ -32,7 +33,7 @@ export const actions: Actions = {
 			}));
 		} catch (error) {
 			const message = error instanceof Error ? error.message : 'Sign-up failed unexpectedly.';
-			return fail(500, { error: message, email });
+			return fail(500, { error: formatSupabaseRequestError(error, 'signup'), email });
 		}
 
 		if (error) {

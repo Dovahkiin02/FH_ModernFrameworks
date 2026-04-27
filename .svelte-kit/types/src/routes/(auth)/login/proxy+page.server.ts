@@ -2,6 +2,7 @@
 import { fail, redirect } from '@sveltejs/kit';
 import { SUPABASE_CONFIG_ERROR } from '$lib/supabase/config';
 import type { Actions, PageServerLoad } from './$types';
+import { formatSupabaseRequestError } from "$lib/supabase/errors.ts";
 
 export const load = async ({ parent }: Parameters<PageServerLoad>[0]) => {
 	const { user } = await parent();
@@ -11,7 +12,7 @@ export const load = async ({ parent }: Parameters<PageServerLoad>[0]) => {
 };
 
 export const actions = {
-	default: async ({ request, locals }: import('./$types').RequestEvent) => {
+	submit: async ({ request, locals }: import('./$types').RequestEvent) => {
 		const formData = await request.formData();
 		const email = String(formData.get('email') ?? '').trim();
 		const password = String(formData.get('password') ?? '');
@@ -26,7 +27,7 @@ export const actions = {
 			({ error } = await locals.supabase.auth.signInWithPassword({ email, password }));
 		} catch (error) {
 			const message = error instanceof Error ? error.message : 'Login failed unexpectedly.';
-			return fail(500, { error: message, email });
+			return fail(500, { error: formatSupabaseRequestError(error, 'login'), email });
 		}
 
 		if (error) {
